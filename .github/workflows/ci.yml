@@ -1,0 +1,57 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gather info
+        id: info
+        run: |
+          PACKAGE='ghcr.io/${{github.repository_owner}}/clang-format'
+          TAGS="${PACKAGE}:latest"
+          echo "##[set-output name=tags;]${TAGS}"
+      - name: Checkout code
+        uses: actions/checkout@v2.3.4
+      - name: Set up docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1.1.1
+        with:
+          version: latest
+      - name: Set up cache
+        uses: actions/cache@v2.1.4
+        with:
+          path: /tmp/.buildx-cache
+          key: buildx-${{hashFiles('Dockerfile', '.dockerignore', 'root/**')}}
+          restore-keys: buildx-
+      - name: Build image
+        uses: docker/build-push-action@v2.3.0
+        with:
+          builder: ${{steps.buildx.outputs.name}}
+          context: .
+          tags: ${{steps.info.outputs.tags}}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
+          push: false
+      - name: Login into registry
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v1.8.0
+        with:
+          registry: ghcr.io
+          username: ${{github.repository_owner}}
+          password: ${{github.token}}
+      - name: Push image
+        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v2.3.0
+        with:
+          builder: ${{steps.buildx.outputs.name}}
+          context: .
+          platforms: ${{steps.info.outputs.platforms}}
+          tags: ${{steps.info.outputs.tags}}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
+          push: true
