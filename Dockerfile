@@ -25,7 +25,6 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     PACKAGE="clang-format-${CLANG_FORMAT_VERSION}" && \
     apt-get update && \
     apt-get install --no-install-recommends -y \
-      git \
       ${PACKAGE} && \
     update-alternatives --install \
       /usr/bin/clang-format clang-format \
