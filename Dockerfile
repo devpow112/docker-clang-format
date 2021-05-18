@@ -43,16 +43,16 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 CMD ["/bin/bash"]
 
 # labels
-LABEL maintainer devpow112 \
-      org.opencontainers.image.licenses MIT \
-      org.opencontainers.image.authors devpow112 \
-      org.opencontainers.image.vendor devpow112 \
-      org.opencontainers.image.title "Docker Clang Format" \
-      org.opencontainers.image.description \
-        "Docker container containing all needed tools to run Clang Format." \
-      org.opencontainers.image.documentation \
-        https://github.com/devpow112/docker-clang-format#readme \
-      org.opencontainers.image.source \
-        https://github.com/devpow112/docker-clang-format \
-      org.opencontainers.image.url \
+LABEL maintainer devpow112
+LABEL org.opencontainers.image.authors devpow112
+LABEL org.opencontainers.image.description \
+        "Docker container containing all needed tools to run Clang Format."
+LABEL org.opencontainers.image.documentation \
+        https://github.com/devpow112/docker-clang-format#readme
+LABEL org.opencontainers.image.licenses MIT
+LABEL org.opencontainers.image.source \
         https://github.com/devpow112/docker-clang-format
+LABEL org.opencontainers.image.title "Docker Clang Format"
+LABEL org.opencontainers.image.url \
+        https://github.com/devpow112/docker-clang-format
+LABEL org.opencontainers.image.vendor devpow112
