@@ -2,7 +2,10 @@ FROM ubuntu:focal-20210416
 
 # set input arguments
 ARG CLANG_FORMAT_VERSION="12"
-          
+
+# set default shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # install packages
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update && \
@@ -14,9 +17,9 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
       gnupg \
       wget && \
     URL='https://apt.llvm.org/' && \
-    wget -O - "${URL}llvm-snapshot.gpg.key" | apt-key add - && \
+    wget -nv -O - "${URL}llvm-snapshot.gpg.key" | apt-key add - && \
     OS_CODENAME=$(grep 'VERSION_CODENAME=' /etc/os-release) && \
-    OS_CODENAME=$(echo "${OS_CODENAME}" | awk -F= {'print $2'}) && \
+    OS_CODENAME=$(echo "${OS_CODENAME}" | awk -F= '{print $2}') && \
     TOOLCHAIN="llvm-toolchain-${OS_CODENAME}-${CLANG_FORMAT_VERSION}" && \
     echo "deb ${URL}${OS_CODENAME} ${TOOLCHAIN} main" > \
       /etc/apt/sources.list.d/llvm.list && \
@@ -37,9 +40,19 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
       /tmp/*
 
 # default command
-CMD ["bash"]
+CMD ["/bin/bash"]
 
 # labels
-LABEL maintainer devpow112
-LABEL org.opencontainers.image.source \
-      https://github.com/devpow112/docker-clang-format
+LABEL maintainer devpow112 \
+      org.opencontainers.image.licenses MIT \
+      org.opencontainers.image.authors devpow112 \
+      org.opencontainers.image.vendor devpow112 \
+      org.opencontainers.image.title "Docker Clang Format" \
+      org.opencontainers.image.description \
+        "Docker container containing all needed tools to run Clang Format." \
+      org.opencontainers.image.documentation \
+        https://github.com/devpow112/docker-clang-format#readme \
+      org.opencontainers.image.source \
+        https://github.com/devpow112/docker-clang-format \
+      org.opencontainers.image.url \
+        https://github.com/devpow112/docker-clang-format
