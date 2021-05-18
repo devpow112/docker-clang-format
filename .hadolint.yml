@@ -11,4 +11,3 @@ label-schema:
   org.opencontainers.image.title: text
   org.opencontainers.image.url: url
   org.opencontainers.image.vendor: text
-
