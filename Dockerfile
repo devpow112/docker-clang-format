@@ -9,7 +9,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # install packages
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update && \
-    apt-get upgrade -y && \
     apt-get install --no-install-recommends -y \
       apt-transport-https \
       apt-utils \
