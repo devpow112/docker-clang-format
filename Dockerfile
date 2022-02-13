@@ -8,8 +8,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # install packages
 RUN export DEBIAN_FRONTEND='noninteractive' && \
+    echo '###### Set up packages' && \
     apt-get update && \
-    apt-get install --no-install-recommends -y \
+    apt-get install --no-install-recommends --no-install-suggests -y \
       apt-transport-https \
       apt-utils \
       ca-certificates \
@@ -26,16 +27,25 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
       /etc/apt/sources.list.d/llvm.list && \
     PACKAGE="clang-format-${CLANG_FORMAT_VERSION}" && \
     apt-get update && \
-    apt-get install --no-install-recommends -y \
+    apt-get install --no-install-recommends --no-install-suggests -y \
       ${PACKAGE} && \
     update-alternatives --install \
       /usr/bin/clang-format clang-format \
       /usr/bin/clang-format-${CLANG_FORMAT_VERSION} 100 && \
+    echo '###### Clean up' && \
+    apt-get autoremove --purge -y \
+      apt-transport-https \
+      apt-utils \
+      ca-certificates \
+      gnupg \
+      wget && \
     apt-get autoremove --purge -y && \
+    apt-get autoclean && \
     apt-get clean && \
     rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/* \
+      /var/log/* \
       /tmp/*
 
 # default command

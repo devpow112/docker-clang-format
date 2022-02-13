@@ -1,0 +1,7 @@
+documentation:
+  - '*.md'
+docker:
+  - Dockerfile
+  - .dockerignore
+github-actions:
+  - .github/workflows/*.yml
