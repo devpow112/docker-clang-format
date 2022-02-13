@@ -1,0 +1,19 @@
+name: Pull Request
+on:
+  pull_request:
+    branches: main
+jobs:
+  ci:
+    name: CI
+    permissions:
+      contents: read
+    uses: ./.github/workflows/ci.yml
+  label:
+    name: Label
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Apply labels
+        uses: actions/labeler@v3.0.2
+        with:
+          repo-token: ${{github.token}}
