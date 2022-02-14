@@ -1,4 +1,10 @@
-# Docker Clang Format
+> This repository is deprecated and will no longer be updated or maintined.
+> Please consider using one of these alternatives instead of this repository and
+> the associated docker image
+> 
+> * [jidicula/clang-format-action]
+
+# Docker Clang Format (🚨 Unmaintained 🚨)
 
 [![License]](LICENSE)
 [![Release][Release Badge]][Release Workflow]
@@ -40,3 +46,4 @@ Note that `CLANG_FORMAT_VERSION` defaults to `12` if not supplied.
 [License]: https://img.shields.io/github/license/devpow112/docker-clang-format?label=License
 [Release Badge]: https://github.com/devpow112/docker-clang-format/actions/workflows/release.yml/badge.svg?branch=main
 [Release Workflow]: https://github.com/devpow112/docker-clang-format/actions/workflows/release.yml?query=branch%3Amain
+[jidicula/clang-format-action]: https://github.com/jidicula/clang-format-action
