@@ -3,6 +3,7 @@
 > the associated docker image
 > 
 > * [jidicula/clang-format-action]
+> * [RafikFarhad/clang-format-github-action]
 
 # Docker Clang Format (🚨 Unmaintained 🚨)
 
@@ -47,3 +48,4 @@ Note that `CLANG_FORMAT_VERSION` defaults to `12` if not supplied.
 [Release Badge]: https://github.com/devpow112/docker-clang-format/actions/workflows/release.yml/badge.svg?branch=main
 [Release Workflow]: https://github.com/devpow112/docker-clang-format/actions/workflows/release.yml?query=branch%3Amain
 [jidicula/clang-format-action]: https://github.com/jidicula/clang-format-action
+[RafikFarhad/clang-format-github-action]: https://github.com/RafikFarhad/clang-format-github-action
