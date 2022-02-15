@@ -1,1 +1,3 @@
 default: true
+MD041: false
+MD009: false
