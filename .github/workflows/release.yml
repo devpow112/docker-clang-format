@@ -33,7 +33,7 @@ jobs:
           key: buildx-${{hashFiles('Dockerfile', '.dockerignore')}}
           restore-keys: buildx-
       - name: Login to registry
-        uses: docker/login-action@v1.12.0
+        uses: docker/login-action@v1.14.1
         with:
           registry: ghcr.io
           username: ${{github.actor}}
